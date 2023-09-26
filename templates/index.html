@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{{ url_for('static', filename='./css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+<script src="{{ url_for('static', filename='./js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+    window.onload = function (){  
+        js_object={{imgnames|safe}};
+        for (var i=0;i<js_object.length;i++){
+            var eleImg = document.createElement("img");//创建一个img元素   
+            eleImg.src="static/ocr_images/"+js_object[i];   //给img元素的src属性赋值  
+            eleImg.width="220";
+            eleImg.style.margin="3px";
+            var imgdiv = document.getElementById('imgdiv'); //获得dom对象 
+            imgdiv.appendChild(eleImg);    //为dom添加子元素img
+        }        
+    }; 
+    function display_alert()
+    {
+    alert("上传成功")
+    }	
+</script> 
+
+</head>
+<body>
+
+<div class="index-banner">
+    <div class="header-top">	
+        <div class="wrap">
+            <div class="logo">
+                <h1 style="text-align:left; color:white;">SEARCH DEMO</h1> 
+            </div>	
+            <div class="menu">																
+                <div class="box" id="box">
+                </div>
+            </div> 	
+            <div class="clear">
+            </div>		
+        </div>	
+    </div>	
+    <div class="wmuSlider example1">
+        <article style="position: absolute; width: 100%; opacity: 0;"> 
+    		 <div class="banner-wrap">
+    			 <div class="cont span_2_of_3">
+                     
+                    <form action="index"  method='GET'>
+                    				<input class="" style="padding: 12px 30px;background: #8FCDDC;display: inline-block;color: #FFF;cursor: pointer;font-size: 2em;border: none;outline: none;" type="submit" value="文字检索图片DEMO">
+                    </form>
+                     
+                    <div class="search_box">
+                        <form action="search"  method='POST'>
+                            <input type="text" value="{{text_sea}}" id="searchbox" name="data" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '输入文字';}">
+                            <input type="submit" value="">
+                        </form>
+                    </div>
+                    <div>
+                        <form action="" enctype='multipart/form-data' method='POST'>
+                            <input type="file" name="file" style="margin-top:20px;"/>
+                            <input type="submit" value="上传" class="" onclick="display_alert()" style="margin-top:20px;"/>
+                        </form>
+                    </div>  
+                </div>
+            </div>
+        </article>			 
+    </div>
+    <script src="{{ url_for('static', filename='./js/jquery.wmuSlider.js') }}"></script> 
+	 <script>$('.example1').wmuSlider();</script> 	           	      
+</div>
+<div class="main">
+    <div id="imgdiv" >
+    
+    </div>
+</div>
+   	   	
+</body>
+</html>
